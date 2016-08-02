@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "phpunit/phpunit": "5.4.*",
+    "phpunit/phpunit": "4.8.*",
     "clue/graph": "~0.9.0"
   },
   "repositories": [

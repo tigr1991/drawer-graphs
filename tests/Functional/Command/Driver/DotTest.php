@@ -7,23 +7,35 @@ namespace DrawerGraphsTests\Functional\Command\Driver;
  */
 class DotTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var string Для генерации уникальной строки */
+    protected static $i = 'a';
 
     public function testLaunch()
     {
-        $driver = \DrawerGraphs\Command\Driver\Dot::create();
+        \DrawerGraphs\Command\Driver\Dot::create();
     }
 
     public function testCreateScript()
     {
-        $driver = $this->getMock(
-            \DrawerGraphs\Command\Driver\Dot::class,
-            ['_', 'createNodeScript', 'createEdgeScript']
-        );
+        /** @var \DrawerGraphs\Command\Driver\Dot | \PHPUnit_Framework_MockObject_MockObject $driver */
+        $driver = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Driver\Dot::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['_', 'createNodeScript', 'createEdgeScript'])
+            ->getMock();
 
-        $node_1 = $this->getMock(\DrawerGraphs\Command\Node::class);
-        $node_2 = $this->getMock(\DrawerGraphs\Command\Node::class);
-        $node_3 = $this->getMock(\DrawerGraphs\Command\Node::class);
+        $node_1 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Node::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $node_2 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Node::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $node_3 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Node::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $driver
             ->expects($this->at(0))
@@ -43,9 +55,18 @@ class DotTest extends \PHPUnit_Framework_TestCase
             ->with($node_3)
             ->will($this->returnValue('node_3'));
 
-        $edge_1 = $this->getMock(\DrawerGraphs\Command\Edge::class);
-        $edge_2 = $this->getMock(\DrawerGraphs\Command\Edge::class);
-        $edge_3 = $this->getMock(\DrawerGraphs\Command\Edge::class);
+        $edge_1 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Edge::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $edge_2 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Edge::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $edge_3 = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Edge::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $driver
             ->expects($this->at(3))
@@ -65,9 +86,12 @@ class DotTest extends \PHPUnit_Framework_TestCase
             ->with($edge_3)
             ->will($this->returnValue('edge_3'));
 
-        $command = $this->getMock(\DrawerGraphs\Command\Command::class, ['getNodes', 'getEdges'],
-            [$driver]);
-
+        $command = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Command::class)
+            ->disableOriginalConstructor()
+            ->setConstructorArgs([$driver])
+            ->setMethods(['getNodes', 'getEdges'])
+            ->getMock();
 
         $command
             ->expects($this->any())
@@ -84,8 +108,10 @@ class DotTest extends \PHPUnit_Framework_TestCase
 
         $result = $driver->createScript($command);
 
-        $this->assertEquals("digraph MIVAR {\n\tsubgraph cluster{\n\t\t  node_1\n\t\t  node_2\n\t\t  node_3\n\t\t  edge_1\n\t\t  edge_2\n\t\t  edge_3\n\t}\n}",
-            $result);
+        $this->assertEquals(
+            "digraph MIVAR {\n\tsubgraph cluster{\n\t\t  node_1\n\t\t  node_2\n\t\t  node_3\n\t\t  edge_1\n\t\t  edge_2\n\t\t  edge_3\n\t}\n}",
+            $result
+        );
     }
 
     public function testCreateNodeScript()
@@ -115,7 +141,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
 
         $shape = \DrawerGraphs\Command\Registry\NodeValues::getValueForDot($node->getShape());
         $style = \DrawerGraphs\Command\Registry\NodeValues::getValueForDot($node->getStyle());
-        $result = PHPUnitHelper::callProtectedMethod($driver, 'createNodeScript', [$node]);
+        $result = \DrawerGraphsTests\PHPUnitHelper::callProtectedMethod($driver, 'createNodeScript', [$node]);
         $this->assertEquals(
             $node_script = "{$id} [tooltip=\"{$tooltip}\" label=\"{$label}\" color=\"{$border_color}\" shape=\"{$shape}\" fillcolor=\"{$background}\" fontcolor=\"{$font_color}\" fontsize={$font_size} style=\"{$style}\"]",
             $result
@@ -161,7 +187,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
 
         $style = \DrawerGraphs\Command\Registry\EdgeValues::getValueForDot($edge->getStyle());
 
-        $result = PHPUnitHelper::callProtectedMethod($driver, 'createEdgeScript', [$edge]);
+        $result =\DrawerGraphsTests\PHPUnitHelper::callProtectedMethod($driver, 'createEdgeScript', [$edge]);
         $this->assertEquals(
             $edge_script = "{$from->getId()} -> {$to->getId()} [labeldistance={$label_distance} labelangle={$label_angle} headlabel=\"{$label_head}\" taillabel=\"{$label_tail}\" tooltip=\"{$tooltip}\" label=\"{$label}\" color=\"{$color}\" fontcolor=\"{$font_color}\" fontsize={$font_size} style=\"{$style}\" arrowhead=\"\" arrowtail=\"\" penwidth=\"1\"]",
             $result
@@ -169,22 +195,12 @@ class DotTest extends \PHPUnit_Framework_TestCase
 
     }
 
-
-    public function getMock(
-        $originalClassName,
-        $methods = array(),
-        array $arguments = array(),
-        $mockClassName = '',
-        $callOriginalConstructor = false,
-        $callOriginalClone = true,
-        $callAutoload = true,
-        $cloneArguments = false,
-        $callOriginalMethods = false,
-        $proxyTarget = NULL
-    ) {
-        return parent::getMock($originalClassName, $methods, $arguments, $mockClassName, $callOriginalConstructor,
-            $callOriginalClone, $callAutoload, $cloneArguments,
-            $callOriginalMethods);
+    /**
+     * @return string
+     */
+    protected function getUniqueString()
+    {
+        return static::$i++;
     }
 
 }

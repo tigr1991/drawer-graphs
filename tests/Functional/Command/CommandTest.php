@@ -39,6 +39,12 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testAddNodeAndEdge()
     {
         /** @var \DrawerGraphs\Command\Driver\IDriver $driver */
+        $driver = $this
+            ->getMockBuilder(\DrawerGraphs\Command\Driver\IDriver::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        /** @var \DrawerGraphs\Command\Driver\IDriver $driver */
         $command = \DrawerGraphs\Command\Command::create($driver);
         /** @var \DrawerGraphs\Command\Node $node */
         $node = $this
