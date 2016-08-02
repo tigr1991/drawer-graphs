@@ -1,0 +1,29 @@
+{
+  "name": "tigr1991/drawer-graphs",
+  "description": "Drawer of graph",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Ivan Iakovenko",
+      "homepage": "http://cv.totome.ru/",
+      "email": "iakovenko-bmstu@yandex.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "5.4.*",
+    "clue/graph": "~0.9.0"
+  },
+  "repositories": [
+  ],
+  "autoload": {
+    "psr-4": {
+      "DrawerGraphs\\": "src/",
+      "DrawerGraphsTests\\": "tests/"
+    }
+  },
+  "scripts": {
+  }
+}
