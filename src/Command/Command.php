@@ -113,6 +113,7 @@ class Command
 
     /**
      * @param string $output_format
+     * @throws \DrawerGraphs\Exception
      */
     public function setOutputFormat($output_format)
     {
@@ -131,6 +132,10 @@ class Command
         return shell_exec($command);
     }
 
+    /**
+     * @param string $script
+     * @throws \DrawerGraphs\Exception
+     */
     protected function buildCommandAndExec($script)
     {
         $tmp = tempnam(sys_get_temp_dir(), 'vizualization');
@@ -154,7 +159,7 @@ class Command
 
         $command = join(' ', $parts_of_command);
 
-        $process = \SemanticLogic\Process\Linux::create($command);
+        $process = \DrawerGraphs\Process\Linux::create($command);
 
         $this->object_promise = \DrawerGraphs\Command\Promise::create($process, $file);
     }
@@ -178,6 +183,7 @@ class Command
 
     /**
      * @param Node $delete_node
+     * @throws \DrawerGraphs\Exception
      */
     public function deleteNode(\DrawerGraphs\Command\Node $delete_node)
     {
@@ -187,11 +193,12 @@ class Command
                 return;
             }
         }
-        throw new \SemanticLogic\Exception("Данной вершины нет в графе " . var_export($delete_node, true));
+        throw new \DrawerGraphs\Exception("Данной вершины нет в графе " . var_export($delete_node, true));
     }
 
     /**
      * @param Edge $delete_edge
+     * @throws \DrawerGraphs\Exception
      */
     public function deleteEdge(\DrawerGraphs\Command\Edge $delete_edge)
     {
@@ -201,7 +208,7 @@ class Command
                 return;
             }
         }
-        throw new \SemanticLogic\Exception("Данного ребра нет в графе " . var_export($delete_edge, true));
+        throw new \DrawerGraphs\Exception("Данного ребра нет в графе " . var_export($delete_edge, true));
     }
 
     /**

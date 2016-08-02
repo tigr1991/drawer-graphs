@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- */
 
 namespace DrawerGraphs\Command\Registry;
 
+/**
+ * Class EdgeValues
+ * Значения атрибутов ребра
+ */
 class EdgeValues implements IRegistry
 {
 
@@ -52,12 +52,13 @@ class EdgeValues implements IRegistry
     /**
      * @param int $id
      * @return string
+     * @throws \DrawerGraphs\Exception
      */
     public static function getValueForDot($id)
     {
         assert(is_int($id));
         if (!isset(static::getValuesForDot()[$id])) {
-            throw new \SemanticLogic\Exception("Нет значения с id = $id");
+            throw new \DrawerGraphs\Exception("Нет значения с id = $id");
         }
         return static::getValuesForDot()[$id];
     }

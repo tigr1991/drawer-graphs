@@ -8,7 +8,10 @@
 
 namespace DrawerGraphs\Command;
 
-
+/**
+ * Class Node
+ * Класс вершина для дальнейшей отрисовки
+ */
 class Node
 {
     protected $id;
@@ -27,13 +30,18 @@ class Node
     /** @var \DrawerGraphs\Command\Edge[] */
     protected $edges_in = [];
 
-
+    /**
+     * @return static
+     */
     public static function create()
     {
         $obj = new static();
         return $obj;
     }
 
+    /**
+     * Node constructor.
+     */
     protected function __construct()
     {
 

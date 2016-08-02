@@ -38,6 +38,7 @@ class Linux implements IProcess
 
     /**
      * @param string $command
+     * @throws \DrawerGraphs\Exception
      */
     protected function __construct($command)
     {
@@ -50,7 +51,7 @@ class Linux implements IProcess
         $status = proc_get_status($process);
 
         if ($status === false) {
-            throw new \SemanticLogic\Exception("Не удалось получить статус процесса");
+            throw new \DrawerGraphs\Exception("Не удалось получить статус процесса");
         }
         $this->process = $process;
         $this->command = $command;
@@ -68,13 +69,13 @@ class Linux implements IProcess
     }
 
     /**
-     * @return void
+     * @throws \DrawerGraphs\Exception
      */
     protected function updateStatus()
     {
         $status = proc_get_status($this->process);
         if ($status === false) {
-            throw new \SemanticLogic\Exception("Не удалось получить статус процесса");
+            throw new \DrawerGraphs\Exception("Не удалось получить статус процесса");
         }
         $this->running = $status['running'];
         $this->checkExitCode($status['exitcode']);
@@ -109,11 +110,12 @@ class Linux implements IProcess
 
     /**
      * @param int $code
+     * @throws \DrawerGraphs\Exception
      */
     protected function checkExitCode($code)
     {
         if ($code !== 0 && $code !== -1) {
-            throw new \SemanticLogic\Exception("Аварийное завершение процесса");
+            throw new \DrawerGraphs\Exception("Аварийное завершение процесса");
         }
     }
 }

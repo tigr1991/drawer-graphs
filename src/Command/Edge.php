@@ -8,7 +8,10 @@
 
 namespace DrawerGraphs\Command;
 
-
+/**
+ * Class Edge
+ * Класс ребро, для отрисовки
+ */
 class Edge
 {
     /** @var  \DrawerGraphs\Command\Node */
@@ -32,6 +35,11 @@ class Edge
     protected $penwidth = 1;
 
 
+    /**
+     * @param Node $from
+     * @param Node $to
+     * @return static
+     */
     public static function create(
         \DrawerGraphs\Command\Node $from,
         \DrawerGraphs\Command\Node $to
@@ -42,6 +50,11 @@ class Edge
         return $obj;
     }
 
+    /**
+     * Edge constructor.
+     * @param Node $from
+     * @param Node $to
+     */
     protected function __construct(
         \DrawerGraphs\Command\Node $from,
         \DrawerGraphs\Command\Node $to

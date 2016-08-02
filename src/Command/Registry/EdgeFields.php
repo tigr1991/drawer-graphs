@@ -1,14 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- */
 
 namespace DrawerGraphs\Command\Registry;
 
+/**
+ * Class EdgeFields
+ * Атрибуты ребра для отрисовки
+ */
 class EdgeFields implements IRegistry
 {
-
     const STYLE = 200;
 
     /**
@@ -32,14 +31,15 @@ class EdgeFields implements IRegistry
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
+     * @throws \DrawerGraphs\Exception
      */
     public static function getValue($id)
     {
         assert(is_int($id));
         if (!isset(static::getValues()[$id])) {
-            throw new \SemanticLogic\Exception("Нет поля с id = $id");
+            throw new \DrawerGraphs\Exception("Нет поля с id = $id");
         }
         return static::getValues()[$id];
     }

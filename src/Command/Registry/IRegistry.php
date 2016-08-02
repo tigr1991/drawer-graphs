@@ -8,6 +8,9 @@
  */
 namespace DrawerGraphs\Command\Registry;
 
+/**
+ * Interface IRegistry
+ */
 interface IRegistry
 {
 

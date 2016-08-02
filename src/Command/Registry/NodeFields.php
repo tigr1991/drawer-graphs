@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- */
 
 namespace DrawerGraphs\Command\Registry;
 
+/**
+ * Class NodeFields
+ * Атрибуты вершины для отрисовки
+ */
 class NodeFields implements IRegistry
 {
     const SHAPE = 100;
@@ -37,12 +37,13 @@ class NodeFields implements IRegistry
     /**
      * @param int $id
      * @return string
+     * @throws \DrawerGraphs\Exception
      */
     public static function getValue($id)
     {
         assert(is_int($id));
         if (!isset(static::getValues()[$id])) {
-            throw new \SemanticLogic\Exception("Нет поля с id = $id");
+            throw new \DrawerGraphs\Exception("Нет поля с id = $id");
         }
         return static::getValues()[$id];
     }

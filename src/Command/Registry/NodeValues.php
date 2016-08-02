@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- */
 
 namespace DrawerGraphs\Command\Registry;
 
+/**
+ * Class NodeValues
+ * Значения атрибутов вершины
+ */
 class NodeValues implements IRegistry
 {
     const SHAPE_DEFAULT = 101;
@@ -22,7 +22,9 @@ class NodeValues implements IRegistry
     const STYLE_BOLD = 206;
     const STYLE_FILLED = 207;
 
-
+    /**
+     * @return string[]
+     */
     public static function getNames()
     {
         return [
@@ -43,7 +45,9 @@ class NodeValues implements IRegistry
         ];
     }
 
-
+    /**
+     * @return string[]
+     */
     public static function getValuesForDot()
     {
         return [
@@ -66,12 +70,13 @@ class NodeValues implements IRegistry
     /**
      * @param int $id
      * @return string
+     * @throws \DrawerGraphs\Exception
      */
     public static function getValueForDot($id)
     {
         assert(is_int($id));
         if (!isset(static::getValuesForDot()[$id])) {
-            throw new \SemanticLogic\Exception("Нет значения с id = $id");
+            throw new \DrawerGraphs\Exception("Нет значения с id = $id");
         }
         return static::getValuesForDot()[$id];
     }
