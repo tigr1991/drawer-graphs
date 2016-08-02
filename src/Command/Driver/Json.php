@@ -1,22 +1,19 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Ivan
- * Date: 04.12.2015
- * Time: 16:22
- */
 namespace DrawerGraphs\Command\Driver;
 
+/**
+ * Class Json
+ * Представить граф в виде JSON
+ */
 class Json implements IDriver
 {
-
     /**
      * @param \DrawerGraphs\Command\Command $command
+     * @throws \DrawerGraphs\Exception
      */
     public function createScript(\DrawerGraphs\Command\Command $command)
     {
-        // TODO: Implement createScript() method.
+        throw new \DrawerGraphs\Exception("Данный метод ещё не реализован");
     }
-
 }

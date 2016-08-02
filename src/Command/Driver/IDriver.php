@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ivan
- * Date: 07.12.2015
- * Time: 8:30
- */
 
 namespace DrawerGraphs\Command\Driver;
 
+/**
+ * Interface IDriver
+ * Интерфейс создания скриптов из Command
+ */
 interface IDriver
 {
     /**

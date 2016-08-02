@@ -12,6 +12,8 @@ class Command
     const FORMAT_SVG = 'svg';
     const FORMAT_PNG = 'png';
 
+    const EXECUTABLE_DOT = 'dot';
+
 
     /** @var  \DrawerGraphs\Command\Node[] */
     protected $nodes = [];
@@ -28,7 +30,7 @@ class Command
     protected $object_promise;
 
     /** @var string */
-    protected $executable = 'dot';
+    protected $executable = self::EXECUTABLE_DOT;
 
 
     /**

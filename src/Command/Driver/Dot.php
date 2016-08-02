@@ -1,17 +1,26 @@
 <?php
 
-
 namespace DrawerGraphs\Command\Driver;
 
+/**
+ * Class Dot
+ * Формирование скрипта для Dot
+ */
 class Dot implements IDriver
 {
 
+    /**
+     * @return static
+     */
     public static function create()
     {
         $obj = new static();
         return $obj;
     }
 
+    /**
+     * Dot constructor.
+     */
     protected function __construct()
     {
 
@@ -25,6 +34,8 @@ class Dot implements IDriver
      */
     public function createScriptWithoutGroups(\DrawerGraphs\Command\Command $command)
     {
+        //TODO Данный метод нуждается в рефакторинге
+
         $script = [];
         $script[] = 'digraph MIVAR {';
 
@@ -47,6 +58,8 @@ class Dot implements IDriver
      */
     public function createScript(\DrawerGraphs\Command\Command $command)
     {
+        //TODO Данный метод нуждается в рефакторинге
+
         $script_by_groups = [];
         foreach ($command->getNodes() as $node) {
             $script_by_groups[$node->getGroup()][] = '  ' . $this->createNodeScript($node);
@@ -90,6 +103,10 @@ class Dot implements IDriver
         return $node_script;
     }
 
+    /**
+     * @param \DrawerGraphs\Command\Edge $edge
+     * @return string
+     */
     protected function createEdgeScript(\DrawerGraphs\Command\Edge $edge)
     {
         $from = $edge->getFrom()->getId();
