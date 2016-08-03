@@ -30,4 +30,30 @@ class PHPUnitHelper
         //$reflection_method->
         return $reflection_method->invokeArgs($object, $params);
     }
+
+    /**
+     * @param $object
+     * @param $name
+     * @return mixed
+     */
+    public static function getProtectedProperty($object, $name)
+    {
+        $reflection = new \ReflectionClass($object);
+        $reflection_property = $reflection->getProperty($name);
+        $reflection_property->setAccessible(true);
+        return $reflection_property->getValue($object);
+    }
+
+    /**
+     * @param $object
+     * @param $name
+     * @param $value
+     */
+    public static function setProtectedProperty($object, $name, $value)
+    {
+        $reflection = new \ReflectionClass($object);
+        $reflection_property = $reflection->getProperty($name);
+        $reflection_property->setAccessible(true);
+        $reflection_property->setValue($object, $value);
+    }
 }
