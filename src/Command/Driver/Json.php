@@ -8,6 +8,24 @@ namespace DrawerGraphs\Command\Driver;
  */
 class Json implements IDriver
 {
+
+    /**
+     * @return static
+     */
+    public static function create()
+    {
+        $obj = new static();
+        return $obj;
+    }
+
+    /**
+     * Dot constructor.
+     */
+    protected function __construct()
+    {
+
+    }
+
     /**
      * @param \DrawerGraphs\Command\Command $command
      * @throws \DrawerGraphs\Exception

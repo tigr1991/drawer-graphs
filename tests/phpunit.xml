@@ -33,7 +33,7 @@
             <exclude>
                 <!--<directory suffix=".php">../tests</directory>-->
                 <directory>../vendor</directory>
-                <!--<directory>../tests</directory>-->
+                <directory>../tests</directory>
             </exclude>
         </whitelist>
     </filter>
