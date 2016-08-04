@@ -26,4 +26,4 @@ $code = $drawer->render();
 
 Пример того, что может строить данный проект:
 
-![Image alt](https://github.com/tigr1991/drawer-graphs/raw/develop/doc/example.png)
+![Image alt](https://github.com/tigr1991/drawer-graphs/raw/master/doc/example.png)
