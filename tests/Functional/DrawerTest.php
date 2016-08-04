@@ -17,6 +17,7 @@ class DrawerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDraw()
     {
+        $this->markTestSkipped("Данный тест является примером и требует Dot");
         $graph = new \Fhaculty\Graph\Graph;
         $drawer = \DrawerGraphs\Drawer::create();
         $drawer->prepare($graph);
